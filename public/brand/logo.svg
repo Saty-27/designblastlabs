@@ -1,0 +1,26 @@
+<svg width="224" height="48" viewBox="0 0 224 48" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Design Blast Labs">
+  <!-- Monogram tile: D + blast bolt -->
+  <rect x="0" y="2" width="44" height="44" rx="12" fill="#0E1018"/>
+
+  <!-- Geometric D -->
+  <path d="M10 12H19C25 12 29 17 29 24C29 31 25 36 19 36H10V12Z" fill="#FFFFFF"/>
+  <path d="M16 18H19C21.8 18 23.2 20.6 23.2 24C23.2 27.4 21.8 30 19 30H16V18Z" fill="#0E1018"/>
+
+  <!-- Blast bolt cutting through -->
+  <path d="M33.5 9L25.5 23H30.5L24 39L37.5 21.5H31.5L36 9H33.5Z" fill="#FF4F17"/>
+
+  <!-- Wordmark: textLength locks the lockup width across font fallbacks -->
+  <text x="56" y="25"
+        font-family="'Barlow Condensed','Oswald','Archivo Narrow','Arial Narrow',sans-serif"
+        font-size="24" font-weight="800" letter-spacing="0.01em"
+        textLength="150" lengthAdjust="spacingAndGlyphs"
+        fill="#0E1018">DESIGN <tspan fill="#FF4F17">BLAST</tspan></text>
+
+  <!-- LABS, rule running out to the wordmark edge -->
+  <text x="56" y="40"
+        font-family="'Inter','Helvetica Neue',Arial,sans-serif"
+        font-size="10.5" font-weight="700" letter-spacing="0.3em"
+        textLength="50" lengthAdjust="spacingAndGlyphs"
+        fill="#0E1018">LABS</text>
+  <line x1="116" y1="36.5" x2="206" y2="36.5" stroke="#0E1018" stroke-width="1.4" opacity="0.85"/>
+</svg>

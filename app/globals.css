@@ -1,0 +1,245 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --white: #FFFFFF;
+  --black: #0E1018;
+  --orange: #FF4F17;
+  --grey-600: #666666;
+  --grey-400: #999999;
+  --grey-200: #EAEAEA;
+  --grey-100: #F5F5F5;
+
+  --nav-h: clamp(72px, 4vw, 88px);
+
+  /* legacy aliases */
+  --color-blast-orange: var(--orange);
+  --color-blast-black: var(--black);
+  --color-blast-white: var(--white);
+}
+
+/* Single content rail — navbar and hero align to this.
+   Full-bleed with fluid gutters so the banner fills wide screens. */
+.site-container {
+  width: 100%;
+  padding-inline: clamp(20px, 2.5vw, 52px);
+}
+
+html {
+  scroll-behavior: smooth;
+  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+}
+
+body {
+  background-color: #FFFFFF;
+  color: #0E1018;
+  font-family: var(--font-inter), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+  background-color: #FF4F17;
+  color: #FFFFFF;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #F4F5F7;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #D1D5DB;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #FF4F17;
+}
+
+/* Infinite Marquee Animations */
+@keyframes marquee {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-33.333333%);
+  }
+}
+
+@keyframes marquee-reverse {
+  0% {
+    transform: translateX(-33.333333%);
+  }
+  100% {
+    transform: translateX(0%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee 35s linear infinite;
+}
+
+.animate-marquee-reverse {
+  animation: marquee-reverse 35s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee,
+  .animate-marquee-reverse {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
+
+/* Hero entrance motion — replayed on each slide change via React key */
+@keyframes heroRise {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: none; }
+}
+
+@keyframes heroVisualIn {
+  from { opacity: 0; transform: translateX(22px) scale(0.985); }
+  to   { opacity: 1; transform: none; }
+}
+
+@keyframes heroCardIn {
+  from { opacity: 0; transform: translateY(12px) scale(0.96); }
+  to   { opacity: 1; transform: none; }
+}
+
+.hero-rise   { animation: heroRise 0.7s cubic-bezier(0.22, 0.61, 0.36, 1) both; }
+.hero-visual { animation: heroVisualIn 0.85s cubic-bezier(0.22, 0.61, 0.36, 1) both; }
+.hero-card   { animation: heroCardIn 0.6s cubic-bezier(0.22, 0.61, 0.36, 1) both; }
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-rise,
+  .hero-visual,
+  .hero-card {
+    animation: none !important;
+  }
+}
+
+/* Hero visual: load-in, then a slow continuous float.
+   Split across wrappers so the transforms don't fight each other. */
+@keyframes heroImageIn {
+  from { opacity: 0; transform: scale(0.96); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+@keyframes heroFloat {
+  0%, 100% { transform: translateY(-5px); }
+  50%      { transform: translateY(5px); }
+}
+
+.hero-image-in { animation: heroImageIn 900ms cubic-bezier(0.22, 0.61, 0.36, 1) both; }
+.hero-float    { animation: heroFloat 6.5s ease-in-out infinite; }
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-image-in,
+  .hero-float {
+    animation: none !important;
+  }
+}
+
+/* Client trust strip — two identical runs, so -50% loops seamlessly */
+@keyframes trustMarquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+.animate-trust-marquee {
+  animation: trustMarquee 46s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-trust-marquee { animation: none !important; }
+}
+
+/* Contact modal entrance */
+@keyframes dblFade {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes dblRise {
+  from { opacity: 0; transform: translateY(18px) scale(0.985); }
+  to   { opacity: 1; transform: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  [style*="dblFade"], [style*="dblRise"] { animation: none !important; }
+}
+
+/* ── Custom pointer ───────────────────────────────────────────
+   Only ever active when CustomCursor mounts, which it refuses to do on
+   touch screens or under prefers-reduced-motion. */
+.dbl-cursor-dot,
+.dbl-cursor-ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 200;
+  pointer-events: none;
+  opacity: 0;
+  will-change: transform;
+}
+
+.dbl-cursor-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 999px;
+  background: var(--orange);
+  transition: opacity 200ms ease;
+}
+
+.dbl-cursor-ring {
+  width: 34px;
+  height: 34px;
+  border-radius: 999px;
+  border: 1.5px solid rgba(255, 79, 23, 0.55);
+  transition: opacity 200ms ease, width 260ms cubic-bezier(0.22, 0.61, 0.36, 1),
+    height 260ms cubic-bezier(0.22, 0.61, 0.36, 1), background-color 260ms ease,
+    border-color 260ms ease;
+}
+
+/* Over anything clickable the ring opens up and fills. */
+.dbl-cursor-ring.is-active {
+  width: 56px;
+  height: 56px;
+  background: rgba(255, 79, 23, 0.14);
+  border-color: var(--orange);
+}
+
+.dbl-cursor-ring.is-pressed {
+  width: 26px;
+  height: 26px;
+  background: rgba(255, 79, 23, 0.28);
+}
+
+/* Hide the native arrow only while the custom one is running. */
+html.has-custom-cursor,
+html.has-custom-cursor * {
+  cursor: none !important;
+}
+
+/* Keep the real caret in text fields — typing without one is horrible. */
+html.has-custom-cursor input,
+html.has-custom-cursor textarea,
+html.has-custom-cursor select,
+html.has-custom-cursor [contenteditable="true"] {
+  cursor: auto !important;
+}
+
+/* Spark trail canvas — sits just under the dot and ring. */
+.dbl-cursor-canvas {
+  position: fixed;
+  inset: 0;
+  z-index: 199;
+  pointer-events: none;
+}

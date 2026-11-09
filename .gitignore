@@ -1,0 +1,21 @@
+node_modules
+.next
+out
+*.tsbuildinfo
+next-env.d.ts
+.env*.local
+.DS_Store
+/qa
+
+# local contact-request store (dev only)
+.data/
+
+# IDE and tool directories
+.chrome-user-data
+.claude
+
+# Scratch and test artifacts in root
+debug_*.png
+preview_*.jpg
+test_crop_*.png
+qa-*.png
