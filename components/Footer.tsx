@@ -91,14 +91,28 @@ export const socials: {
   icon?: React.ElementType;
   path?: string;
 }[] = [
-  { label: "LinkedIn", href: "https://linkedin.com", icon: Linkedin },
-  { label: "Instagram", href: "https://instagram.com", icon: Instagram },
-  { label: "Facebook", href: "https://facebook.com", icon: Facebook },
-  { label: "YouTube", href: "https://youtube.com", icon: Youtube },
-  // lucide only ships the old bird, so use the official X mark.
-  { label: "X", href: "https://x.com", path: brandIcons.x.path },
-  // The only one here pointing at a real destination.
-  { label: "WhatsApp", href: "https://wa.me/918928794211", path: brandIcons.whatsapp.path },
+  {
+    label: "LinkedIn",
+    href: "https://www.linkedin.com/company/design-blast-labs",
+    icon: Linkedin,
+  },
+  {
+    label: "Instagram",
+    href: "https://www.instagram.com/designblastlabs?psln=M254dWlsY3F1c21y",
+    icon: Instagram,
+  },
+  {
+    label: "YouTube",
+    href: "https://www.youtube.com/@DesignBlastLabs",
+    icon: Youtube,
+  },
+  {
+    label: "WhatsApp",
+    href: "https://wa.me/918928794211",
+    path: brandIcons.whatsapp.path,
+  },
+  { label: "Facebook", href: null, icon: Facebook },
+  { label: "X", href: null, path: brandIcons.x.path },
 ];
 
 /** UNVERIFIED CLAIM — confirm the subscriber count or remove this line. */
@@ -339,9 +353,9 @@ export default function Footer() {
                       <a
                         href={href as string}
                         target="_blank"
-                        rel="noreferrer"
-                        aria-label={label}
-                        className="grid h-10 w-10 place-items-center rounded-[10px] border border-white/12 text-white transition-colors hover:border-[var(--orange)] hover:bg-[var(--orange)]"
+                        rel="noopener noreferrer"
+                        aria-label={`Follow Design Blast Labs on ${label}`}
+                        className="grid h-10 w-10 place-items-center rounded-[10px] border border-white/12 text-white transition-all duration-200 hover:scale-105 hover:border-[var(--orange)] hover:bg-[var(--orange)]"
                       >
                         {Icon ? (
                           <Icon aria-hidden="true" className="h-[18px] w-[18px]" />
